@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>notifications_martinezvargas documentation</title>
+        <title>customer-app_martinezvargas documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">notifications_martinezvargas documentation</a>
+                    <a href="../" class="navbar-brand">customer-app_martinezvargas documentation</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -95,7 +95,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Classes</li>
-  <li class="breadcrumb-item" >SmsMessageSender</li>
+  <li class="breadcrumb-item" >Validator</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -119,18 +119,12 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>libs/domain/src/sms-message-sender.ts</code>
+            <code>libs/domain/src/validator.ts</code>
         </p>
 
 
 
 
-            <p class="comment">
-                <h3>Implements</h3>
-            </p>
-            <p class="comment">
-                            <code><a href="../interfaces/IMessageSender.html" target="_self" >IMessageSender</a></code>
-            </p>
 
 
             <section data-compodoc="block-index">
@@ -147,7 +141,8 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#SendMessage" >SendMessage</a>
+                                    <span class="modifier">Public</span>
+                                <a href="#ValidateCustomer" >ValidateCustomer</a>
                             </li>
                         </ul>
                     </td>
@@ -172,16 +167,18 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="SendMessage"></a>
+                    <a name="ValidateCustomer"></a>
                     <span class="name">
-                        <span ><b>SendMessage</b></span>
-                        <a href="#SendMessage"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Public</span>
+                        <span ><b>ValidateCustomer</b></span>
+                        <a href="#ValidateCustomer"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>SendMessage(Message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ValidateCustomer(customer: <a href="../classes/Customer.html" target="_self">Customer</a>)</code>
                 </td>
             </tr>
 
@@ -189,7 +186,7 @@
                     <tr>
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="4"
-                                    class="link-to-prism">libs/domain/src/sms-message-sender.ts:4</a></div>
+                                    class="link-to-prism">libs/domain/src/validator.ts:4</a></div>
                         </td>
                     </tr>
 
@@ -210,9 +207,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>Message</td>
+                                                <td>customer</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            <code><a href="../classes/Customer.html" target="_self" >Customer</a></code>
                                             </td>
 
                                             <td>
@@ -225,7 +222,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
                             <div class="io-description">
@@ -245,13 +242,20 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IMessageSender } from &quot;./imessage-sender.interface&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Customer } from &quot;./customer&quot;;
 
-export class SmsMessageSender implements IMessageSender {
-    SendMessage(Message: string): string {
-        return &quot;&#x27;&quot; + Message + &quot;&#x27; : This Message has been sent using SMS&quot;;
-    }
-}</code></pre>
+export class Validator {
+    public ValidateCustomer(customer: Customer): boolean
+    {
+        //Need to Validate the Customer Object
+        if (typeof customer.Name &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; customer.Name.trim().length &#x3D;&#x3D;&#x3D; 0) throw new Error(&quot;Name can&#x27;t be null or empty&quot;);
+        if (typeof customer.Email &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; customer.Email.trim().length &#x3D;&#x3D;&#x3D; 0) throw new Error(&quot;Email can&#x27;t be null or empty&quot;);
+        if (typeof customer.MobileNumber &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; customer.MobileNumber.trim().length &#x3D;&#x3D;&#x3D; 0) throw new Error(&quot;MobileNumber can&#x27;t be null or empty&quot;);
+        if (typeof customer.Address &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; customer.Address.trim().length &#x3D;&#x3D;&#x3D; 0) throw new Error(&quot;Address can&#x27;t be null or empty&quot;);
+        return true;
+    }    
+}
+</code></pre>
     </div>
 </div>
 
@@ -289,7 +293,7 @@ export class SmsMessageSender implements IMessageSender {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'SmsMessageSender.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'Validator.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

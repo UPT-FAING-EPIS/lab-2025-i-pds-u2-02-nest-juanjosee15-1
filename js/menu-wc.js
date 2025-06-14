@@ -15,7 +15,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
         <nav>
             <ul class="list">
                 <li class="title">
-                    <a href="index.html" data-type="index-link">notifications_martinezvargas documentation</a>
+                    <a href="index.html" data-type="index-link">customer-app_martinezvargas documentation</a>
                 </li>
 
                 <li class="divider"></li>
@@ -114,32 +114,19 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
                             <li class="link">
-                                <a href="classes/AbstractMessage.html" data-type="entity-link" >AbstractMessage</a>
+                                <a href="classes/Customer.html" data-type="entity-link" >Customer</a>
                             </li>
                             <li class="link">
-                                <a href="classes/EmailMessageSender.html" data-type="entity-link" >EmailMessageSender</a>
+                                <a href="classes/CustomerRegistration.html" data-type="entity-link" >CustomerRegistration</a>
                             </li>
                             <li class="link">
-                                <a href="classes/LongMessage.html" data-type="entity-link" >LongMessage</a>
+                                <a href="classes/DataAccessLayer.html" data-type="entity-link" >DataAccessLayer</a>
                             </li>
                             <li class="link">
-                                <a href="classes/ShortMessage.html" data-type="entity-link" >ShortMessage</a>
+                                <a href="classes/EmailService.html" data-type="entity-link" >EmailService</a>
                             </li>
                             <li class="link">
-                                <a href="classes/SmsMessageSender.html" data-type="entity-link" >SmsMessageSender</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#interfaces-links"' :
-                            'data-bs-target="#xs-interfaces-links"' }>
-                            <span class="icon ion-md-information-circle-outline"></span>
-                            <span>Interfaces</span>
-                            <span class="icon ion-ios-arrow-down"></span>
-                        </div>
-                        <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
-                            <li class="link">
-                                <a href="interfaces/IMessageSender.html" data-type="entity-link" >IMessageSender</a>
+                                <a href="classes/Validator.html" data-type="entity-link" >Validator</a>
                             </li>
                         </ul>
                     </li>
