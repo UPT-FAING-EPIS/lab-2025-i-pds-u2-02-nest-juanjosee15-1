@@ -1,0 +1,59 @@
+name: Package and Publish
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-test-analyze-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: https://npm.pkg.github.com/
+
+      # ---- Notifications Project ----
+      - name: Install dependencies (notifications)
+        run: |
+          cd notifications
+          npm ci
+
+      - name: Run unit tests (notifications)
+        run: |
+          cd notifications
+          npm run test:cov
+
+      - name: Build and Publish Package (notifications)
+        run: |
+          cd notifications
+          npm version patch
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ---- Customer App Project ----
+      - name: Install dependencies (Customer-App)
+        run: |
+          cd customer-app
+          npm ci
+
+      - name: Run unit tests (Customer-App)
+        run: |
+          cd customer-app
+          npm run test:cov
+
+      - name: Build and Publish Package (Customer-App)
+        run: |
+          cd customer-app
+          npm version patch
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

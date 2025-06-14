@@ -1,0 +1,56 @@
+name: Release Version
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+# ---- Notifications Project ----
+      - name: Install dependencies (Notifications)
+        run: |
+          cd notifications
+          npm ci
+
+      - name: Build project (Notifications)
+        run: |
+          cd notifications
+          npm run build
+
+      - name: Create GitHub Release (Notifications)
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# ---- Customer App Project ----
+      - name: Install dependencies (Customers-App)
+        run: |
+          cd customer-app
+          npm ci
+
+      - name: Build project (Customers-App)
+        run: |
+          cd customer-app
+          npm run build
+
+      - name: Create GitHub Release (Customers-App)
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

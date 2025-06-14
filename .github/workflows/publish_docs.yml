@@ -1,0 +1,54 @@
+name: Publish Documentation
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+ # ---- Notifications Project ----
+      - name: Install dependencies (Notifications)
+        run: |
+          cd notifications
+          npm ci
+
+      - name: Generate documentation (Notifications)
+        run: |
+          cd notifications
+          npx @compodoc/compodoc -p tsconfig.json -d documentation
+
+      - name: Deploy to GitHub Pages (Notifications)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./notifications/documentation
+
+  # ---- Customer App Project ----
+
+      - name: Install dependencies (Customers-App)
+        run: |
+          cd customer-app
+          npm ci
+
+      - name: Generate documentation (Customers-App)
+        run: |
+          cd customer-app
+          npx @compodoc/compodoc -p tsconfig.json -d documentation
+
+      - name: Deploy to GitHub Pages (Customers-App)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./customer-app/documentation
